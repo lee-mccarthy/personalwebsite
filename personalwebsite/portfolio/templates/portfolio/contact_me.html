@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load portfolio_tags %}
+{% block unique_head %}<title>Contact Me | Lee McCarthy</title>{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col text-center">
+      <h1>Contact Me</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-lg-6">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="row">
+          <div class="col-6">
+            <div class="form-floating mb-3">
+              {% if form.name.errors %}
+              {{ form.name|addclass:"form-control is-invalid" }}
+              {% else %}
+              {{ form.name|addclass:"form-control" }}
+              {% endif %}
+              <label for="id_{{ form.name.label.lower }}">{{ form.name.label }}</label>
+              <div id="id_{{ form.name.label.lower }}Feedback" class="invalid-feedback">
+                {{ form.name.errors.as_text }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-floating mb-3">
+              {% if form.email.errors %}
+              {{ form.email|addclass:"form-control is-invalid" }}
+              {% else %}
+              {{ form.email|addclass:"form-control" }}
+              {% endif %}
+              <label for="id_{{ form.email.label.lower }}">{{ form.email.label }}</label>
+              <div id="id_{{ form.email.label.lower }}Feedback" class="invalid-feedback">
+                {{ form.email.errors.as_text }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          {% if form.subject.errors %}
+          {{ form.subject|addclass:"form-control is-invalid" }}
+          {% else %}
+          {{ form.subject|addclass:"form-control" }}
+          {% endif %}
+          <label for="id_{{ form.subject.label.lower }}">{{ form.subject.label }}</label>
+          <div id="id_{{ form.subject.label.lower }}Feedback" class="invalid-feedback">
+            {{ form.subject.errors.as_text }}
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          {% if form.message.errors %}
+          {{ form.message|addclass:"form-control is-invalid" }}
+          {% else %}
+          {{ form.message|addclass:"form-control" }}
+          {% endif %}
+          <label for="id_{{ form.message.label.lower }}">{{ form.message.label }}</label>
+          <div id="id_{{ form.message.label.lower }}Feedback" class="invalid-feedback">
+            {{ form.message.errors.as_text }}
+          </div>
+        </div>
+        <div class="text-center">
+          <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

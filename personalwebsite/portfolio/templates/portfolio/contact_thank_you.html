@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block unique_head %}<title>Thank You | Lee McCarthy</title>{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h1>Thank you for getting in contact{% if name %}, {{ name }}{% endif %}!</h1>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col text-center">
+      <a class="btn btn-primary" href="{% url 'portfolio:index' %}">Return to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

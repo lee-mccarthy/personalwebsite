@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load portfolio_tags %}
+{% block unique_head %}<title>Index | Lee McCarthy</title>{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 mt-3">
+      <img src="{% static 'portfolio/images/me.jpg' %}" alt="A picture of me" class="img-fluid">
+    </div>
+    <div class="col-lg-6 text-center mt-3">
+      <h1>Skills</h1>
+      <div class="row">
+        <div class="col-6">
+          <h4>Technical</h4>
+          <ul>
+            <li>Python</li>
+            <li>C#</li>
+            <li>Unity</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <h4>Personal</h4>
+          <ul>
+            <li>Customer Service</li>
+            <li>Adaptability</li>
+            <li>Communication</li>
+            <li>Teamwork</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row mt-3">
+    <div class="col text-center">
+      <h1>Projects</h1>
+    </div>
+  </div>
+  <div class="row">
+    {% for project in projects %}
+    <div class="col-lg-4 col-12 mt-3">
+      <div class="card h-100">
+        <div class="ratio ratio-4x3">
+          <img src="/media/{{ project.image }}" alt="{{ project.title }} image" class="card-img-top" style="object-fit: cover;">
+        </div>
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ project.title }}</h5>
+          <p class="card-text">{{ project.subtitle }}</p>
+          <a href="{% url 'portfolio:project_detail' project.pk %}" class="btn btn-primary mt-auto">View</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col text-center">
+      <h1>Contact Me</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-lg-6">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="row">
+          <div class="col-6">
+            <div class="form-floating mb-3">
+              {% if form.name.errors %}
+              {{ form.name|addclass:"form-control is-invalid" }}
+              {% else %}
+              {{ form.name|addclass:"form-control" }}
+              {% endif %}
+              <label for="id_{{ form.name.label.lower }}">{{ form.name.label }}</label>
+              <div id="id_{{ form.name.label.lower }}Feedback" class="invalid-feedback">
+                {{ form.name.errors.as_text }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-floating mb-3">
+              {% if form.email.errors %}
+              {{ form.email|addclass:"form-control is-invalid" }}
+              {% else %}
+              {{ form.email|addclass:"form-control" }}
+              {% endif %}
+              <label for="id_{{ form.email.label.lower }}">{{ form.email.label }}</label>
+              <div id="id_{{ form.email.label.lower }}Feedback" class="invalid-feedback">
+                {{ form.email.errors.as_text }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          {% if form.subject.errors %}
+          {{ form.subject|addclass:"form-control is-invalid" }}
+          {% else %}
+          {{ form.subject|addclass:"form-control" }}
+          {% endif %}
+          <label for="id_{{ form.subject.label.lower }}">{{ form.subject.label }}</label>
+          <div id="id_{{ form.subject.label.lower }}Feedback" class="invalid-feedback">
+            {{ form.subject.errors.as_text }}
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          {% if form.message.errors %}
+          {{ form.message|addclass:"form-control is-invalid" }}
+          {% else %}
+          {{ form.message|addclass:"form-control" }}
+          {% endif %}
+          <label for="id_{{ form.message.label.lower }}">{{ form.message.label }}</label>
+          <div id="id_{{ form.message.label.lower }}Feedback" class="invalid-feedback">
+            {{ form.message.errors.as_text }}
+          </div>
+        </div>
+        <div class="text-center">
+          <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
