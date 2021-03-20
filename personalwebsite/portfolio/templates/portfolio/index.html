@@ -45,12 +45,16 @@
     {% for project in projects %}
     <div class="col-lg-4 col-12 mt-3">
       <div class="card h-100">
+        {% if project.image %}
         <div class="ratio ratio-4x3">
           <img src="{{ project.image.url }}" alt="{{ project.title }} image" class="card-img-top" style="object-fit: cover;">
         </div>
+        {% endif %}
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ project.title }}</h5>
+          {% if project.subtitle %}
           <p class="card-text">{{ project.subtitle }}</p>
+          {% endif %}
           <a href="{% url 'portfolio:project_detail' project.pk %}" class="btn btn-primary mt-auto">View</a>
         </div>
       </div>
