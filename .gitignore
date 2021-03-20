@@ -135,7 +135,3 @@ dmypy.json
 media/
 migrations/
 /personalwebsite/static/
-
-# Ignoring this app for a little while.
-#   Will add it back after some changes.
-/personalwebsite/games/

@@ -23,6 +23,7 @@ from django.urls import include, path
 urlpatterns = [
     path(os.getenv('personalwebsite_ADMIN_URL')+'/', admin.site.urls),
     path('', include('portfolio.urls', namespace='portfolio')),
+    path('games/', include('games.urls', namespace='games')),
 ]
 
 if settings.DEBUG:
