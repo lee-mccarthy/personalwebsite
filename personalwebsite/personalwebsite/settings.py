@@ -29,6 +29,9 @@ SECRET_KEY = CONFIG['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = CONFIG.get('DEBUG', False)
 
+CSRF_COOKIE_SECURE = CONFIG.get('CSRF_COOKIE_SECURE', True)
+SESSION_COOKIE_SECURE = CONFIG.get('SESSION_COOKIE_SECURE', True)
+
 ALLOWED_HOSTS = ['leemccarthy.com', 'www.leemccarthy.com', 'localhost', '127.0.0.1']
 
 
