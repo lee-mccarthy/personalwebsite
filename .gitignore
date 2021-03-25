@@ -132,6 +132,7 @@ dmypy.json
 .pyre/
 
 # Project specific
-media/
+config.json
 migrations/
 /personalwebsite/static/
+media/

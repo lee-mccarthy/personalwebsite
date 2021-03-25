@@ -10,21 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import os
+import json
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Get secret settings.
+with open(BASE_DIR / 'personalwebsite/config.json', 'r') as f:
+    CONFIG = json.load(f)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('personalwebsite_SECRET_KEY')
+SECRET_KEY = CONFIG['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('personalwebsite_DEBUG') == 'True'
+DEBUG = CONFIG['DEBUG'] == 'True'
 
 ALLOWED_HOSTS = ['leemccarthy.com', 'www.leemccarthy.com', 'localhost', '127.0.0.1']
 
@@ -86,11 +89,11 @@ WSGI_APPLICATION = 'personalwebsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('personalwebsite_DATABASE_NAME'),
-        'USER': os.getenv('personalwebsite_DATABASE_USER'),
-        'PASSWORD': os.getenv('personalwebsite_DATABASE_PASSWORD'),
-        'HOST': os.getenv('personalwebsite_DATABASE_HOST'),
-        'PORT': os.getenv('personalwebsite_DATABASE_PORT'),
+        'NAME': CONFIG['DATABASE_NAME'],
+        'USER': CONFIG['DATABASE_USER'],
+        'PASSWORD': CONFIG['DATABASE_PASSWORD'],
+        'HOST': CONFIG['DATABASE_HOST'],
+        'PORT': CONFIG['DATABASE_PORT'],
     }
 }
 
@@ -147,9 +150,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Email service
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('personalwebsite_EMAIL_HOST')
-EMAIL_HOST_USER = os.getenv('personalwebsite_EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('personalwebsite_EMAIL_HOST_PASSWORD')
+EMAIL_HOST = CONFIG['EMAIL_HOST']
+EMAIL_HOST_USER = CONFIG['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = CONFIG['EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'lee@leemccarthy.com'
