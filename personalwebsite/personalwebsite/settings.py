@@ -27,7 +27,7 @@ with open(BASE_DIR / 'personalwebsite/config.json', 'r') as f:
 SECRET_KEY = CONFIG['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = CONFIG['DEBUG'] == 'True'
+DEBUG = CONFIG.get('DEBUG', False)
 
 ALLOWED_HOSTS = ['leemccarthy.com', 'www.leemccarthy.com', 'localhost', '127.0.0.1']
 
