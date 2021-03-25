@@ -17,7 +17,7 @@ class Index(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['projects'] = Project.objects.all()
+        context['projects'] = Project.objects.order_by('-pk')
         return context
 
 
