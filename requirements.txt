@@ -1,5 +1,5 @@
 asgiref==3.4.1
-Django==3.2.5
+Django==3.2.6
 django-axes==5.20.0
 django-ipware==3.0.7
 Pillow==8.3.1
