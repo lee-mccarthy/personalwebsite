@@ -11,7 +11,8 @@ class Index(FormView):
     success_url = reverse_lazy('portfolio:thankyou')
 
     def form_valid(self, form):
-        form.send_email()
+        if form.honeypot_empty():
+            form.send_email()
         self.request.session['contact_name'] = form.cleaned_data['name']
         return super().form_valid(form)
 
@@ -27,7 +28,8 @@ class ContactMe(FormView):
     success_url = reverse_lazy('portfolio:thankyou')
 
     def form_valid(self, form):
-        form.send_email()
+        if form.honeypot_empty():
+            form.send_email()
         self.request.session['contact_name'] = form.cleaned_data['name']
         return super().form_valid(form)
 

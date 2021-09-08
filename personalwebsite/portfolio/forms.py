@@ -18,6 +18,13 @@ class ContactForm(forms.Form):
     message = forms.CharField(
         widget=forms.Textarea(attrs={'placeholder': 'Message', 'style': 'height: 10em;'}),
     )
+    website = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'style': 'display: none;'})
+    )
+
+    def honeypot_empty(self):
+        return len(self.cleaned_data['website']) == 0
 
     def send_email(self):
         message = 'Name: ' + self.cleaned_data['name'] + \
