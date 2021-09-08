@@ -1,5 +1,9 @@
+from datetime import datetime
+
 from django import forms
 from django.core.mail import send_mail
+
+from .models import Contact, Spam
 
 
 class ContactForm(forms.Form):
@@ -19,12 +23,36 @@ class ContactForm(forms.Form):
         widget=forms.Textarea(attrs={'placeholder': 'Message', 'style': 'height: 10em;'}),
     )
     website = forms.CharField(
+        max_length=255,
         required=False,
-        widget=forms.TextInput(attrs={'style': 'display: none;'})
+        widget=forms.TextInput(attrs={'style': 'display: none;'}),
     )
 
     def honeypot_empty(self):
         return len(self.cleaned_data['website']) == 0
+
+    def save_contact(self, ip):
+        contact = Contact(
+            name=self.cleaned_data['name'],
+            email=self.cleaned_data['email'],
+            subject=self.cleaned_data['subject'],
+            message=self.cleaned_data['message'],
+            contact_time=datetime.now(),
+            ip_address=ip,
+        )
+        contact.save()
+
+    def save_spam(self, ip):
+        spam = Spam(
+            name=self.cleaned_data['name'],
+            email=self.cleaned_data['email'],
+            subject=self.cleaned_data['subject'],
+            message=self.cleaned_data['message'],
+            website=self.cleaned_data['website'],
+            contact_time=datetime.now(),
+            ip_address=ip,
+        )
+        spam.save()
 
     def send_email(self):
         message = 'Name: ' + self.cleaned_data['name'] + \

@@ -11,8 +11,16 @@ class Index(FormView):
     success_url = reverse_lazy('portfolio:thankyou')
 
     def form_valid(self, form):
+        x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = self.request.META.get('REMOTE_ADDR')
         if form.honeypot_empty():
+            form.save_contact(ip)
             form.send_email()
+        else:
+            form.save_spam(ip)
         self.request.session['contact_name'] = form.cleaned_data['name']
         return super().form_valid(form)
 
@@ -28,8 +36,16 @@ class ContactMe(FormView):
     success_url = reverse_lazy('portfolio:thankyou')
 
     def form_valid(self, form):
+        x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = self.request.META.get('REMOTE_ADDR')
         if form.honeypot_empty():
+            form.save_contact(ip)
             form.send_email()
+        else:
+            form.save_spam(ip)
         self.request.session['contact_name'] = form.cleaned_data['name']
         return super().form_valid(form)
 

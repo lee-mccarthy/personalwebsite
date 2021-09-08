@@ -18,3 +18,19 @@ class Link(models.Model):
 
     def __str__(self):
         return self.project.title + ' | ' + self.text
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    contact_time = models.DateTimeField(auto_now_add=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name + ' | ' + self.subject
+
+
+class Spam(Contact):
+    website = models.CharField(max_length=255)
