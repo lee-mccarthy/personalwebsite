@@ -1,6 +1,6 @@
 asgiref==3.4.1
 Django==3.2.7
-django-axes==5.23.0
+django-axes==5.24.0
 django-ipware==4.0.0
 Pillow==8.3.2
 psycopg2-binary==2.9.1
