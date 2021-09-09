@@ -17,11 +17,12 @@ class SessionAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['name', 'subject', 'ip_address', 'contact_time']
+    list_display = ['subject', 'name', 'email', 'contact_time', 'ip_address']
     readonly_fields = [
+        'subject',
         'name',
         'email',
-        'subject',
+        'contact_time',
         'message',
         'ip_address',
         'user_agent',
@@ -30,11 +31,12 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(Spam)
 class SpamAdmin(admin.ModelAdmin):
-    list_display = ['name', 'subject', 'ip_address', 'contact_time']
+    list_display = ['subject', 'name', 'email', 'contact_time', 'ip_address']
     readonly_fields = [
+        'subject',
         'name',
         'email',
-        'subject',
+        'contact_time',
         'message',
         'website',
         'ip_address',
