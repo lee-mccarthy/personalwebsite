@@ -18,11 +18,28 @@ class SessionAdmin(admin.ModelAdmin):
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['name', 'subject', 'ip_address', 'contact_time']
+    readonly_fields = [
+        'name',
+        'email',
+        'subject',
+        'message',
+        'ip_address',
+        'user_agent',
+    ]
 
 
 @admin.register(Spam)
 class SpamAdmin(admin.ModelAdmin):
     list_display = ['name', 'subject', 'ip_address', 'contact_time']
+    readonly_fields = [
+        'name',
+        'email',
+        'subject',
+        'message',
+        'website',
+        'ip_address',
+        'user_agent',
+    ]
 
 
 class LinkInline(admin.TabularInline):

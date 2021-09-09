@@ -16,11 +16,12 @@ class Index(FormView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = self.request.META.get('REMOTE_ADDR')
+        user_agent = self.request.META.get('HTTP_USER_AGENT')
         if form.honeypot_empty():
-            form.save_contact(ip)
+            form.save_contact(ip, user_agent)
             form.send_email()
         else:
-            form.save_spam(ip)
+            form.save_spam(ip, user_agent)
         self.request.session['contact_name'] = form.cleaned_data['name']
         return super().form_valid(form)
 
@@ -41,11 +42,12 @@ class ContactMe(FormView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = self.request.META.get('REMOTE_ADDR')
+        user_agent = self.request.META.get('HTTP_USER_AGENT')
         if form.honeypot_empty():
-            form.save_contact(ip)
+            form.save_contact(ip, user_agent)
             form.send_email()
         else:
-            form.save_spam(ip)
+            form.save_spam(ip, user_agent)
         self.request.session['contact_name'] = form.cleaned_data['name']
         return super().form_valid(form)
 

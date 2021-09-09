@@ -27,10 +27,21 @@ class Contact(models.Model):
     message = models.TextField()
     contact_time = models.DateTimeField(auto_now_add=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.name + ' | ' + self.subject
 
 
-class Spam(Contact):
+class Spam(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
     website = models.CharField(max_length=255)
+    contact_time = models.DateTimeField(auto_now_add=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return self.name + ' | ' + self.subject

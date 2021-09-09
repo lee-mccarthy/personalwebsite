@@ -31,17 +31,18 @@ class ContactForm(forms.Form):
     def honeypot_empty(self):
         return len(self.cleaned_data['website']) == 0
 
-    def save_contact(self, ip):
+    def save_contact(self, ip, user_agent):
         contact = Contact(
             name=self.cleaned_data['name'],
             email=self.cleaned_data['email'],
             subject=self.cleaned_data['subject'],
             message=self.cleaned_data['message'],
             ip_address=ip,
+            user_agent=user_agent,
         )
         contact.save()
 
-    def save_spam(self, ip):
+    def save_spam(self, ip, user_agent):
         spam = Spam(
             name=self.cleaned_data['name'],
             email=self.cleaned_data['email'],
@@ -49,6 +50,7 @@ class ContactForm(forms.Form):
             message=self.cleaned_data['message'],
             website=self.cleaned_data['website'],
             ip_address=ip,
+            user_agent=user_agent,
         )
         spam.save()
 
