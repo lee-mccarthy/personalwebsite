@@ -37,7 +37,6 @@ class ContactForm(forms.Form):
             email=self.cleaned_data['email'],
             subject=self.cleaned_data['subject'],
             message=self.cleaned_data['message'],
-            contact_time=datetime.now(),
             ip_address=ip,
         )
         contact.save()
@@ -49,7 +48,6 @@ class ContactForm(forms.Form):
             subject=self.cleaned_data['subject'],
             message=self.cleaned_data['message'],
             website=self.cleaned_data['website'],
-            contact_time=datetime.now(),
             ip_address=ip,
         )
         spam.save()

@@ -17,12 +17,12 @@ class SessionAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['name', 'subject', 'id_address', 'contact_time']
+    list_display = ['name', 'subject', 'ip_address', 'contact_time']
 
 
 @admin.register(Spam)
 class SpamAdmin(admin.ModelAdmin):
-    list_display = ['name', 'subject', 'id_address', 'contact_time']
+    list_display = ['name', 'subject', 'ip_address', 'contact_time']
 
 
 class LinkInline(admin.TabularInline):
